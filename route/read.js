@@ -14,7 +14,7 @@ router.use('/story', (req, res) => {
     JOIN subCategory
     ON subCategory.mainCatIdx = story.mainCatIdx AND story.idx = ?
     JOIN mainCategory
-    ON subCategory.idx = story.subCatIdx AND subCategory.mainCatIdx=mainCategory.idx`, [req.body.id], (err, result, fields) => {
+    ON subCategory.subIdx = story.subCatIdx AND subCategory.mainCatIdx=mainCategory.mainIdx`, [req.body.id], (err, result, fields) => {
         if (err) console.log(err)
         else res.send(result[0]);
     })
@@ -23,7 +23,7 @@ router.use('/categories', (req, res) => {
     if (req.query.data === "sub") {
         connection.query(`SELECT * FROM subCategory 
 		JOIN mainCategory
-        ON (mainCategory.idx = ? AND mainCategory.idx = subCategory.mainCatIdx)`, [req.query.mainId], (err, result, fields) => {
+        ON (mainCategory.mainIdx = ? AND mainCategory.mainIdx = subCategory.mainCatIdx)`, [req.query.mainId], (err, result, fields) => {
             if (err) console.log(err);
             else res.json({
                 subCategory: result
