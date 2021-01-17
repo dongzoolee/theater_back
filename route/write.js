@@ -17,7 +17,14 @@ router.use('/story', async (req, res) => {
         else console.log('insertion success');
     })
 })
-
+router.use('/anonycomment', async (req, res) => {
+    const date = await getCustomDate();
+    connection.query(`INSERT INTO comment(storyId, writer, date, content, ip)
+    VALUES(?, ?, ?, ?, ?)`, [req.body.storyId, req.body.writer, date, req.body.content, req.body.ip], (err, result, fields) => {
+        if (err) console.log(err);
+        else console.log('insertion success');
+    })
+})
 function getCustomDate() {
     return new Promise((resolve, reject) => {
         let date = new Date().toLocaleString('ko-kr');

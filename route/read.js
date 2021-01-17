@@ -9,7 +9,6 @@ const connection = mysql2.createPool({
 });
 
 router.use('/story', (req, res) => {
-    console.log(req.body);
     connection.query(`SELECT * FROM story
     JOIN subCategory
     ON subCategory.mainCatIdx = story.mainCatIdx AND story.idx = ?
@@ -37,5 +36,12 @@ router.use('/categories', (req, res) => {
             });
         });
     }
+})
+router.use('/comment', (req, res) => {
+    connection.query('SELECT * FROM comment WHERE storyId = ?', [req.body.id], (err, result, fields) => {
+        connection.query('SELECT COUNT(*) as cnt FROM comment WHERE storyId = ?', [req.body.id], (err1, result1, fields1) => {
+            res.send({ comment: result, cnt: result1[0].cnt })
+        })
+    })
 })
 module.exports = router;
