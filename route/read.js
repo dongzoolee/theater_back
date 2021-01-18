@@ -38,8 +38,16 @@ router.use('/categories', (req, res) => {
     }
 })
 router.use('/comment', (req, res) => {
-    connection.query('SELECT * FROM comment WHERE storyId = ?', [req.body.id], (err, result, fields) => {
-        connection.query('SELECT COUNT(*) as cnt FROM comment WHERE storyId = ?', [req.body.id], (err1, result1, fields1) => {
+    connection.query(`
+        SELECT * FROM comment
+        LEFT JOIN subComment
+        ON comment.storyId = ? AND subComment.commentId = comment.mainIdx
+        WHERE comment.storyId = ?
+    `, [req.body.id, req.body.id], (err, result, fields) => {
+    connection.query(`
+    SELECT ( SELECT COUNT(*) FROM comment WHERE storyId = ?) 
+     + ( SELECT COUNT(*) FROM subComment WHERE storyId = ?) AS cnt 
+    `, [req.body.id, req.body.id], (err1, result1, fields1) => {
             res.send({ comment: result, cnt: result1[0].cnt })
         })
     })

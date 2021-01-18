@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mysql2 = require('mysql2');
+const axios = require('axios');
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
     user: process.env.MYSQL2_USER,
@@ -14,16 +15,28 @@ router.use('/story', async (req, res) => {
     connection.query(`INSERT INTO story(mainCatIdx, subCatIdx, title, date, location, content)
     VALUES(?, ?, ?, ?, ?, ?)`, [req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content], (err, result, fields) => {
         if (err) console.log(err);
-        else console.log('insertion success');
+        else { console.log('insertion success'); res.send(''); };
     })
 })
 router.use('/anonycomment', async (req, res) => {
     const date = await getCustomDate();
-    connection.query(`INSERT INTO comment(storyId, writer, date, content, ip)
+
+    connection.query(`INSERT INTO comment(storyId, mainWriter, mainDate, mainContent, ip)
     VALUES(?, ?, ?, ?, ?)`, [req.body.storyId, req.body.writer, date, req.body.content, req.body.ip], (err, result, fields) => {
         if (err) console.log(err);
-        else console.log('insertion success');
+        else { console.log('insertion success'); res.send(''); };
+
     })
+})
+router.use('/anonysubcomment', async (req, res) => {
+    const date = await getCustomDate();
+    console.log(req.body)
+    connection.query(`INSERT INTO subComment(storyId, commentId, subWriter, subDate, subContent, ip)
+    VALUES(?, ?, ?, ?, ?, ?)`, [req.body.storyId, req.body.targetMainId, req.body.writer, date, req.body.content, req.body.ip], (err, result, fields) => {
+        if (err) console.log(err);
+        else { console.log('insertion success'); res.send(''); };
+    })
+
 })
 function getCustomDate() {
     return new Promise((resolve, reject) => {
