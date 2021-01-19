@@ -18,6 +18,29 @@ router.use('/story', (req, res) => {
         else res.send(result[0]);
     })
 })
+router.use('/storybymaincategory', (req, res) => {
+    connection.query(`
+    SELECT subCategory FROM subCategory
+    WHERE mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+    `, [req.body.mainCategory], (err2, result2, fields2) => {
+        connection.query(`SELECT COUNT(*) AS cnt FROM story
+    WHERE mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+    `, [req.body.mainCategory], (err1, result1, fields1) => {
+            connection.query(`SELECT * FROM story
+                WHERE mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+                ORDER BY date DESC
+                LIMIT ?, 4
+                `, [req.body.mainCategory, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
+                if (err) console.log(err);
+                else res.json({
+                    content: result,
+                    cnt: result1[0].cnt,
+                    subCategory: result2
+                })
+            })
+        })
+    })
+})
 router.use('/categories', (req, res) => {
     if (req.query.data === "sub") {
         connection.query(`SELECT * FROM subCategory 
@@ -44,12 +67,61 @@ router.use('/comment', (req, res) => {
         ON comment.storyId = ? AND subComment.commentId = comment.mainIdx
         WHERE comment.storyId = ?
     `, [req.body.id, req.body.id], (err, result, fields) => {
-    connection.query(`
-    SELECT ( SELECT COUNT(*) FROM comment WHERE storyId = ?) 
-     + ( SELECT COUNT(*) FROM subComment WHERE storyId = ?) AS cnt 
+        connection.query(`
+    SELECT (SELECT COUNT(*) FROM comment WHERE storyId = ?) 
+     + (SELECT COUNT(*) FROM subComment WHERE storyId = ?) AS cnt 
     `, [req.body.id, req.body.id], (err1, result1, fields1) => {
             res.send({ comment: result, cnt: result1[0].cnt })
         })
+    })
+})
+router.use('/categorycontents', (req, res) => {
+
+    connection.query(`
+    SELECT COUNT(*) AS cnt FROM story WHERE 
+    mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+    AND
+    subCatIdx = (SELECT subIdx FROM subCategory WHERE subCategory = ?)`, [req.body.mainCategory, req.body.subCategory], (err1, result1, fields1) => {
+        connection.query(`SELECT * FROM story WHERE 
+        mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+        AND
+        subCatIdx = (SELECT subIdx FROM subCategory WHERE subCategory = ?)
+        ORDER BY date DESC
+        LIMIT ?, 4`, [req.body.mainCategory, req.body.subCategory, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
+            if (err) console.log(err)
+            else {
+                res.json({
+                    content: result,
+                    cnt: result1[0].cnt
+                })
+            }
+        })
+    })
+})
+router.use('/locationcontents', (req, res) => {
+    connection.query(`
+    SELECT COUNT(*) AS cnt FROM story WHERE 
+    location = ?`, [req.body.location], (err1, result1, fields1) => {
+        connection.query(`SELECT * FROM story WHERE 
+        location = ?
+        ORDER BY date DESC
+        LIMIT ?, 4`, [req.body.location, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
+            if (err) console.log(err)
+            else {
+                res.json({
+                    content: result,
+                    cnt: result1[0].cnt
+                })
+            }
+        })
+    })
+})
+router.use('/distinctlocation', (req, res) => {
+    connection.query(`SELECT DISTINCT location FROM story`, (err, result, fields) => {
+        if (err) console.log(err)
+        else {
+            res.send(result)
+        }
     })
 })
 module.exports = router;
