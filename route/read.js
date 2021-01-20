@@ -127,15 +127,26 @@ router.use('/distinctlocation', (req, res) => {
 router.use('/searchstory', (req, res) => {
     if (!req.body.subCategory)
         connection.query(`SELECT * FROM story 
-        WHERE title LIKE ?
+        WHERE (title LIKE ?
         OR
-        content LIKE ?
+        content LIKE ?)
         AND mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
         ORDER BY date DESC
         LIMIT ?, 4`, ["%" + req.body.search + "%", "%" + req.body.search + "%", req.body.mainCategory, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
             if (err) console.log(err)
             else res.send(result)
         })
-    else;
+    else
+        connection.query(`SELECT * FROM story 
+        WHERE (title LIKE ?
+        OR
+        content LIKE ?)
+        AND (mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+        AND subCatIdx = (SELECT subIdx FROM subCategory WHERE subCategory = ?))
+        ORDER BY date DESC
+        LIMIT ?, 4`, ["%" + req.body.search + "%", "%" + req.body.search + "%", req.body.mainCategory, req.body.subCategory, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
+            if (err) console.log(err)
+            else res.send(result)
+        })
 })
 module.exports = router;
