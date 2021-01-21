@@ -1,3 +1,9 @@
 const sendMail = require('../functional/sendMail');
+const express = require('express');
+const router = express.Router();
 
-sendMail.main("오류제보", "이거이거해주세요").catch(console.error)
+router.use('/comment', async (req, res) => {
+    await sendMail.main("댓글 신고합니다", req.body.key + "번 댓글을 신고합니다.").catch(console.error)
+    res.send('')
+})
+module.exports = router;

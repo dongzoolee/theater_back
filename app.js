@@ -7,7 +7,7 @@ dotenv.config();
 app.set('port', 2500);
 const writeRouter = require('./route/write');
 const readRouter = require('./route/read');
-const sethitRouter = require('./route/setHit');
+const reportRouter = require('./route/report');
 app.use(cors());
 // POST 크기 제한 상향
 app.use(express.json({
@@ -22,6 +22,8 @@ app.use(express.urlencoded({
 app.use('/api/write', writeRouter);
 // 글 & 댓글 불러오기 router
 app.use('/api/read', readRouter);
+// 신고하기 router
+app.use('/api/report', reportRouter);
 
 const server = app.listen(app.get('port'), () => {
     console.log('server has started on port ' + app.get('port'))

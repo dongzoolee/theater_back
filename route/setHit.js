@@ -12,15 +12,15 @@ const connection = mysql2.createPool({
 setHit.updateHit = async (req) => {
     const date = await getCustomDate();
     console.log(req.body)
-    connection.query('UPDATE hit SET cnt=cnt+1 WHERE storyId = ?', [req.body.id], (err, result, fields) => {
+    connection.query('UPDATE story SET hits=hits+1 WHERE idx = ?', [req.body.id], (err, result, fields) => {
         if (err) console.log(err);
     })
 }
-setHit.createHit = (id)=>{
-    connection.query('INSERT INTO hit(storyId) VALUES(?)',[id],(err,result,fields)=>{
-        if(err)console.log(err);
-    })
-}
+// setHit.createHit = (id)=>{
+//     connection.query('INSERT INTO hit(storyId) VALUES(?)',[id],(err,result,fields)=>{
+//         if(err)console.log(err);
+//     })
+// }
 function getCustomDate() {
     return new Promise((resolve, reject) => {
         let date = new Date().toLocaleString('ko-kr');

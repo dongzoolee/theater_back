@@ -18,7 +18,7 @@ router.use('/story', async (req, res) => {
         else { 
             console.log('insertion success'); 
             res.send(''); 
-            setHit.createHit(result.insertId)
+            // setHit.createHit(result.insertId)
         };
     })
 })

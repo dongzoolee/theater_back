@@ -23,6 +23,13 @@ router.use('/story', (req, res) => {
         };
     })
 })
+router.use('/storybyhot', (req, res) => {
+    connection.query(`SELECT * FROM story
+    ORDER by hits DESC`, [], (err, result, fields) => {
+        if (err) console.log(err);
+        else res.send(result);
+    })
+})
 router.use('/storybymaincategory', (req, res) => {
     connection.query(`
     SELECT subCategory FROM subCategory
@@ -78,6 +85,27 @@ router.use('/comment', (req, res) => {
     `, [req.body.id, req.body.id], (err1, result1, fields1) => {
             res.send({ comment: result, cnt: result1[0].cnt })
         })
+    })
+})
+router.use('/storylinecontents', (req, res) => {
+    connection.query(`
+        (SELECT * FROM story WHERE mainCatIdx = 1
+        ORDER BY hits DESC
+        LIMIT 1)
+        UNION
+        (SELECT * FROM story WHERE mainCatIdx = 2
+        ORDER BY hits DESC
+        LIMIT 1)
+        UNION
+        (SELECT * FROM story WHERE mainCatIdx = 3
+        ORDER BY hits DESC
+        LIMIT 1)
+        UNION
+        (SELECT * FROM story WHERE mainCatIdx = 4
+        ORDER BY hits DESC
+        LIMIT 1)`, (err, result, fields) => {
+        if (err) console.log(err);
+        else { res.send(result); }
     })
 })
 router.use('/categorycontents', (req, res) => {
