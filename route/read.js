@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
+const setHit = require('./setHit');
 const mysql2 = require('mysql2');
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
@@ -15,7 +17,10 @@ router.use('/story', (req, res) => {
     JOIN mainCategory
     ON subCategory.subIdx = story.subCatIdx AND subCategory.mainCatIdx=mainCategory.mainIdx`, [req.body.id], (err, result, fields) => {
         if (err) console.log(err)
-        else res.send(result[0]);
+        else {
+            res.send(result[0])
+            setHit.updateHit(req)
+        };
     })
 })
 router.use('/storybymaincategory', (req, res) => {

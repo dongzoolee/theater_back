@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const setHit = require('./setHit');
 const mysql2 = require('mysql2');
-const axios = require('axios');
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
     user: process.env.MYSQL2_USER,
@@ -15,7 +15,11 @@ router.use('/story', async (req, res) => {
     connection.query(`INSERT INTO story(mainCatIdx, subCatIdx, title, date, location, content)
     VALUES(?, ?, ?, ?, ?, ?)`, [req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content], (err, result, fields) => {
         if (err) console.log(err);
-        else { console.log('insertion success'); res.send(''); };
+        else { 
+            console.log('insertion success'); 
+            res.send(''); 
+            setHit.createHit(result.insertId)
+        };
     })
 })
 router.use('/anonycomment', async (req, res) => {

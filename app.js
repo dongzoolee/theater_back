@@ -7,6 +7,7 @@ dotenv.config();
 app.set('port', 2500);
 const writeRouter = require('./route/write');
 const readRouter = require('./route/read');
+const sethitRouter = require('./route/setHit');
 app.use(cors());
 // POST 크기 제한 상향
 app.use(express.json({
