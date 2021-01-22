@@ -11,10 +11,12 @@ const connection = mysql2.createPool({
 
 setHit.updateHit = async (req) => {
     const date = await getCustomDate();
-    console.log(req.body)
-    connection.query('UPDATE story SET hits=hits+1 WHERE idx = ?', [req.body.id], (err, result, fields) => {
-        if (err) console.log(err);
-    })
+    if (req.body.ip !== '211.215.156.98') {
+        console.log(req.body)
+        connection.query('UPDATE story SET hits=hits+1 WHERE idx = ?', [req.body.id], (err, result, fields) => {
+            if (err) console.log(err);
+        })
+    }
 }
 // setHit.createHit = (id)=>{
 //     connection.query('INSERT INTO hit(storyId) VALUES(?)',[id],(err,result,fields)=>{
