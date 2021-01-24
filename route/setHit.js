@@ -11,7 +11,7 @@ const connection = mysql2.createPool({
 
 setHit.updateHit = async (req) => {
     const date = await getCustomDate();
-    if (req.body.ip !== '211.215.156.98') {
+    if (req.body.ip !== '211.215.156.98' && req.body.ip !== '39.7.58.158') {
         console.log(req.body)
         connection.query('UPDATE story SET hits=hits+1 WHERE idx = ?', [req.body.id], (err, result, fields) => {
             if (err) console.log(err);
