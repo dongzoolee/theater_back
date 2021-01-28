@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const setHit = require('./setHit');
+const updateRss = require('./updateRss');
 const mysql2 = require('mysql2');
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
@@ -10,15 +11,16 @@ const connection = mysql2.createPool({
 });
 
 router.use('/story', async (req, res) => {
-    console.log(req.body)
     const date = await getCustomDate();
     connection.query(`INSERT INTO story(mainCatIdx, subCatIdx, title, date, location, content)
     VALUES(?, ?, ?, ?, ?, ?)`, [req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content], (err, result, fields) => {
         if (err) console.log(err);
-        else { 
-            console.log('insertion success'); 
-            res.send(''); 
+        else {
+            console.log('insertion success');
+            res.send('');
             // setHit.createHit(result.insertId)
+            console.log(result)
+            updateRss.write(result)
         };
     })
 })
@@ -42,6 +44,7 @@ router.use('/anonysubcomment', async (req, res) => {
     })
 
 })
+
 function getCustomDate() {
     return new Promise((resolve, reject) => {
         let date = new Date().toLocaleString('ko-kr');

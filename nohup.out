@@ -1,107 +1,50 @@
-
-> node@1.0.0 start /home/ubuntu/docker/html/react_/node
-> nodemon app.js
-
-[33m[nodemon] 2.0.7[39m
-[33m[nodemon] to restart at any time, enter `rs`[39m
-[33m[nodemon] watching path(s): *.*[39m
-[33m[nodemon] watching extensions: js,mjs,json[39m
-[32m[nodemon] starting `node app.js`[39m
-events.js:174
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: EBADF: bad file descriptor, read
-Emitted 'error' event at:
-    at lazyFs.read (internal/fs/streams.js:165:12)
-    at FSReqWrap.wrapper [as oncomplete] (fs.js:467:17)
-npm ERR! code ELIFECYCLE
-npm ERR! errno 1
-npm ERR! node@1.0.0 start: `nodemon app.js`
-npm ERR! Exit status 1
-npm ERR! 
-npm ERR! Failed at the node@1.0.0 start script.
-npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
-
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /home/ubuntu/.npm/_logs/2021-01-17T01_46_22_116Z-debug.log
-server has started on port 2500
+{ id: '31', ip: '66.249.66.77' } // 구글
+{ id: '34', ip: '66.249.66.83' } // 구글
+{ id: '7', ip: '66.249.66.95' } // 구글
+{ id: '2', ip: '121.136.183.57' }
 insertion success
-insertion success
-server has started on port 2500
-{ id: '23' }
-{ id: '23' }
-{ id: '23' }
-{ id: '15' }
-
-> node@1.0.0 start /home/ubuntu/docker/html/react_/node
-> nodemon app.js
-
-[33m[nodemon] 2.0.7[39m
-[33m[nodemon] to restart at any time, enter `rs`[39m
-[33m[nodemon] watching path(s): *.*[39m
-[33m[nodemon] watching extensions: js,mjs,json[39m
-[32m[nodemon] starting `node app.js`[39m
-events.js:174
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: EBADF: bad file descriptor, read
-Emitted 'error' event at:
-    at lazyFs.read (internal/fs/streams.js:165:12)
-    at FSReqWrap.wrapper [as oncomplete] (fs.js:467:17)
-npm ERR! code ELIFECYCLE
-npm ERR! errno 1
-npm ERR! node@1.0.0 start: `nodemon app.js`
-npm ERR! Exit status 1
-npm ERR! 
-npm ERR! Failed at the node@1.0.0 start script.
-npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
-
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /home/ubuntu/.npm/_logs/2021-01-22T18_18_16_826Z-debug.log
-server has started on port 2500
-{ id: '2', ip: '39.7.58.158' }
-{ id: '4', ip: '39.7.58.158' }
-{ id: '15', ip: '39.7.58.158' }
-{ id: '13', ip: '39.7.58.158' }
-{ id: '13', ip: '39.7.58.158' }
-internal/modules/cjs/loader.js:638
-    throw err;
-    ^
-
-Error: Cannot find module '/home/ubuntu/docker/html/react_/node/server.js'
-    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
-    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
-    at startup (internal/bootstrap/node.js:283:19)
-    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
-server has started on port 2500
-{ id: '22', ip: '1.236.152.204' }
-{ id: '23', ip: '39.7.59.125' }
-{ id: '23', ip: '39.7.59.125' }
-{ id: '25', ip: '39.7.59.125' }
-{ id: '24', ip: '39.7.59.125' }
-{ id: '2', ip: '39.7.59.125' }
-{ id: '22', ip: '39.7.59.125' }
-{ id: '26', ip: '39.7.59.125' }
-{ id: '15', ip: '39.7.59.125' }
-{ id: '13', ip: '39.7.59.125' }
-{ id: '12', ip: '39.7.59.125' }
-{ id: '15', ip: '1.220.207.146' }
-{ id: '23', ip: '183.107.38.181' }
-{ id: '25', ip: '183.107.38.181' }
-{ id: '24', ip: '183.107.38.181' }
-{ id: '26', ip: '183.107.38.181' }
-{ id: '13', ip: '183.107.38.181' }
-{ id: '14', ip: '183.107.38.181' }
-{ id: '1', ip: '183.107.38.181' }
-{ id: '10', ip: '183.107.38.181' }
-{ id: '8', ip: '183.107.38.181' }
-{ id: '23', ip: '183.107.38.181' }
-{ id: '25', ip: '183.107.38.181' }
-{ id: '24', ip: '183.107.38.181' }
-{ id: '23', ip: '183.107.38.181' }
-{ id: '25', ip: '183.107.38.181' }
-{ id: '10', ip: '183.107.38.181' }
-{ id: '15', ip: '183.107.38.181' }
+{ id: '2', ip: '121.136.183.57' }
+{ id: '2', ip: '121.136.183.57' }
+{ id: '3', ip: '121.136.183.57' }
+{ id: '2', ip: '121.136.183.57' }
+{ id: '4', ip: '121.136.183.57' }
+{ id: '33', ip: '121.136.183.57' }
+{ id: '19', ip: '121.136.183.57' }
+{ id: '1', ip: '121.136.183.57' }
+{ id: '11', ip: '121.136.183.57' }
+{ id: '14', ip: '121.136.183.57' }
+{ id: '29', ip: '121.136.183.57' }
+{ id: '29', ip: '121.136.183.57' }
+{ id: '32', ip: '121.136.183.57' }
+{ id: '34', ip: '121.136.183.57' }
+{ id: '33', ip: '66.249.66.77' }
+{ id: '32', ip: '66.249.66.83' }
+{ id: '12', ip: '66.249.66.83' }
+{ id: '31', ip: '66.249.66.83' }
+{ id: '5', ip: '66.249.66.79' }
+{ id: '22', ip: '66.249.66.83' }
+{ id: '1', ip: '66.249.66.83' }
+{ id: '30', ip: '66.249.66.77' }
+{ id: '32', ip: '66.249.66.79' }
+{ id: '14', ip: '66.249.66.79' }
+{ id: '21', ip: '66.249.66.83' }
+{ id: '33', ip: '66.249.66.79' }
+{ id: '23', ip: '66.249.66.79' }
+{ id: '19', ip: '66.249.66.79' }
+{ id: '20', ip: '66.249.66.83' }
+{ id: '9', ip: '66.249.66.83' }
+{ id: '18', ip: '66.249.66.77' }
+{ id: '7', ip: '66.249.66.83' }
+{ id: '28', ip: '66.249.66.83' }
+{ id: '10', ip: '66.249.66.83' }
+{ id: '8', ip: '66.249.66.77' }
+{ id: '26', ip: '66.249.66.83' }
+{ id: '13', ip: '66.249.66.67' }
+{ id: '24', ip: '66.249.66.79' }
+{ id: '16', ip: '66.249.66.67' }
+{ id: '35', ip: '66.249.66.83' }
+{ id: '35', ip: '183.107.38.181' }
+{ id: '34', ip: '66.249.66.79' }
+{ id: '35', ip: '66.249.66.67' }
+{ id: '1', ip: '218.54.66.107' }
+{ id: '15', ip: '66.249.66.83' }
