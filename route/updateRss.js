@@ -1,5 +1,6 @@
 const fs = require('fs');
 const mysql2 = require('mysql2');
+const path = require('path');
 const updateRss = module.exports = {};
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
@@ -7,7 +8,7 @@ const connection = mysql2.createPool({
     password: process.env.MYSQL2_PW,
     database: process.env.MYSQL2_DB
 });
-updateRss.write = async (result) => {
+updateRss.write = async (result, id) => {
     const content = await formatContent(result.content);
     connection.query(`(SELECT mainCategory from mainCategory WHERE mainIdx = ?)
     UNION
@@ -18,16 +19,17 @@ updateRss.write = async (result) => {
             // req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content
             ret += '<item>\n';
             ret += `<title>${result.title}</title>`;
-            ret += `<link>https://blog.soga.ng/story/${result.insertId}</link>`;
+            ret += `<link>https://blog.soga.ng/story/${id}</link>`;
             ret += `<description>${content}</description>`;
             ret += `<category>${res[0].mainCategory}</category>`;
             ret += `<category>${res[1].mainCategory}</category>`;
             ret += `<author>dongzoolee</author>`;
-            ret += `<guid isPermaLink="true">https://blog.soga.ng/story/${result.insertId}</guid>`;
-            ret += `<comments>https://blog.soga.ng/story/${result.insertId}#comments</comments>`;
+            ret += `<guid isPermaLink="true">https://blog.soga.ng/story/${id}</guid>`;
+            ret += `<comments>https://blog.soga.ng/story/${id}#comments</comments>`;
             ret += `<pubDate>${getRssDate()}</pubDate>`;
             ret += `</item>\n</channel>\n</rss>`;
-            fs.writeFile(__dirname + '../../react/public/rss.xml', ret, 'utf8', () => { })
+            fs.writeFile(path.resolve(__dirname, '../../react/public/rss.xml'), ret, 'utf8', () => { })
+            fs.writeFile(path.resolve(__dirname, '../../react/build/rss.xml'), ret, 'utf8', () => { })
         })
     })
 }

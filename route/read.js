@@ -9,7 +9,6 @@ const connection = mysql2.createPool({
     password: process.env.MYSQL2_PW,
     database: process.env.MYSQL2_DB
 });
-
 router.use('/story', (req, res) => {
     connection.query(`SELECT * FROM story
     JOIN subCategory

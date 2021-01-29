@@ -48,3 +48,33 @@ insertion success
 { id: '35', ip: '66.249.66.67' }
 { id: '1', ip: '218.54.66.107' }
 { id: '15', ip: '66.249.66.83' }
+server has started on port 2500
+{ id: '14', ip: '223.62.202.220' }
+{ id: '14', ip: '223.62.202.220' }
+{ id: '29', ip: '223.62.202.220' }
+{ id: '7', ip: '223.62.202.220' }
+{ id: '24', ip: '223.62.202.220' }
+{ id: '33', ip: '223.62.202.220' }
+{ id: '13', ip: '223.62.202.220' }
+{ id: '30', ip: '183.107.38.181' }
+{ id: '27', ip: '183.107.38.181' }
+{ id: '29', ip: '183.107.38.181' }
+{ id: '9', ip: '183.107.38.181' }
+{ id: '27', ip: '183.107.38.181' }
+{ targetMainId: 30,
+  storyId: '2',
+  writer: '꾸벅',
+  content: '방갑습니당~',
+  ip: '211.215.156.98' }
+insertion success
+internal/modules/cjs/loader.js:638
+    throw err;
+    ^
+
+Error: Cannot find module '/home/ubuntu/docker/html/react_/node/app./js'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+server has started on port 2500

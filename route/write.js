@@ -9,7 +9,20 @@ const connection = mysql2.createPool({
     password: process.env.MYSQL2_PW,
     database: process.env.MYSQL2_DB
 });
-
+router.use('/tmpstory', async (req, res) => {
+    const date = await getCustomDate();
+    connection.query(`INSERT INTO tmpStory(mainCatIdx, subCatIdx, title, date, location, content)
+    VALUES(?, ?, ?, ?, ?, ?)`, [req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content], (err, result, fields) => {
+        if (err) console.log(err);
+        else {
+            console.log('tmp save success');
+            res.send('');
+            // setHit.createHit(result.insertId)
+            console.log(result)
+            // updateRss.write(req.body, result.insertId)
+        };
+    })
+})
 router.use('/story', async (req, res) => {
     const date = await getCustomDate();
     connection.query(`INSERT INTO story(mainCatIdx, subCatIdx, title, date, location, content)
@@ -20,7 +33,7 @@ router.use('/story', async (req, res) => {
             res.send('');
             // setHit.createHit(result.insertId)
             console.log(result)
-            updateRss.write(result)
+            updateRss.write(req.body, result.insertId)
         };
     })
 })

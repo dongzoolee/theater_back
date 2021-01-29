@@ -1,7 +1,7 @@
 var sendMail = module.exports = {};
 const dotenv = require('dotenv');
 dotenv.config({
-    path:'../.env'
+    path: '../.env'
 });
 const nodemailer = require('nodemailer');
 
