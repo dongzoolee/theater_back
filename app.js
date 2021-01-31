@@ -8,6 +8,8 @@ app.set('port', 2500);
 const writeRouter = require('./route/write');
 const readRouter = require('./route/read');
 const reportRouter = require('./route/report');
+const socketio = require('socket.io');
+
 app.use(cors());
 // POST 크기 제한 상향
 app.use(express.json({
@@ -28,3 +30,13 @@ app.use('/api/report', reportRouter);
 const server = app.listen(app.get('port'), () => {
     console.log('server has started on port ' + app.get('port'))
 })
+// 소켓 라우터
+const io = socketio();
+io.attach(server);
+io.on('connection', (socket) => {
+    socket.on('comment-cng',()=>{
+        io.emit('update-comment');
+    })
+})
+app.set('socketio', io);
+// https://stackoverflow.com/questions/47249009/nodejs-socket-io-in-a-router-page
