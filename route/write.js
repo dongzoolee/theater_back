@@ -11,17 +11,29 @@ const connection = mysql2.createPool({
 });
 router.use('/tmpstory', async (req, res) => {
     const date = await getCustomDate();
-    connection.query(`INSERT INTO tmpStory(mainCatIdx, subCatIdx, title, date, location, content)
+    if (req.body.idx === -1) {
+        connection.query(`INSERT INTO tmpStory(mainCatIdx, subCatIdx, title, date, location, content)
     VALUES(?, ?, ?, ?, ?, ?)`, [req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content], (err, result, fields) => {
-        if (err) console.log(err);
-        else {
-            console.log('tmp save success');
-            res.send('');
-            // setHit.createHit(result.insertId)
-            console.log(result)
-            // updateRss.write(req.body, result.insertId)
-        };
-    })
+            if (err) console.log(err);
+            else {
+                console.log('tmp save success');
+                res.send('');
+                // setHit.createHit(result.insertId)
+                // console.log(result)
+                // updateRss.write(req.body, result.insertId)
+            };
+        })
+    } else {
+        connection.query(`UPDATE tmpStory
+        SET mainCatIdx = ?, subCatIdx = ?, title = ?, date = ?, location = ?, content = ?
+        WHERE idx = ?`, [req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content, req.body.idx], (err, result) => {
+            if (err) console.log(err);
+            else {
+                console.log('tmp update success');
+                res.send('')
+            }
+        });
+    }
 })
 router.use('/story', async (req, res) => {
     const date = await getCustomDate();

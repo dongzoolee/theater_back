@@ -10,6 +10,7 @@ const connection = mysql2.createPool({
     database: process.env.MYSQL2_DB
 });
 router.use('/story', (req, res) => {
+    // if (req.body.ip !== '211.215.156.98') return res.send({ title: '사이트 수리중', content: 'ㅈㅅㅋㅋ' });
     connection.query(`SELECT * FROM story
     JOIN subCategory
     ON subCategory.mainCatIdx = story.mainCatIdx AND story.idx = ?
@@ -20,6 +21,11 @@ router.use('/story', (req, res) => {
             res.send(result[0])
             setHit.updateHit(req)
         };
+    })
+})
+router.use('/tmpstory', (req, res) => {
+    connection.query(`SELECT * FROM tmpStory WHERE idx = ?`, [req.body.id], (err, result) => {
+        res.send(result)
     })
 })
 router.use('/storybyhot', (req, res) => {
@@ -39,7 +45,7 @@ router.use('/storybymaincategory', (req, res) => {
     `, [req.body.mainCategory], (err1, result1, fields1) => {
             connection.query(`SELECT * FROM story
                 WHERE mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
-                ORDER BY date DESC
+                ORDER BY idx DESC
                 LIMIT ?, 4
                 `, [req.body.mainCategory, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
                 if (err) console.log(err);
@@ -49,6 +55,17 @@ router.use('/storybymaincategory', (req, res) => {
                     subCategory: result2
                 })
             })
+        })
+    })
+})
+router.use('/subcatbymaincat', (req, res) => {
+    connection.query(`
+    SELECT subCategory FROM subCategory
+    WHERE mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
+    `, [req.body.mainCategory], (err, result, fields) => {
+        if (err) console.log(err);
+        else res.json({
+            subCategory: result
         })
     })
 })
@@ -88,20 +105,32 @@ router.use('/comment', (req, res) => {
 })
 router.use('/storylinecontents', (req, res) => {
     connection.query(`
-        (SELECT * FROM story WHERE mainCatIdx = 1
-        ORDER BY hits DESC
+        (SELECT * FROM story 
+        JOIN mainCategory
+        ON story.mainCatIdx = 1 
+        AND mainCategory.mainIdx = story.mainCatIdx
+        ORDER BY idx DESC
         LIMIT 1)
         UNION
-        (SELECT * FROM story WHERE mainCatIdx = 2
-        ORDER BY hits DESC
+        (SELECT * FROM story 
+        JOIN mainCategory
+        ON story.mainCatIdx = 2 
+        AND mainCategory.mainIdx = story.mainCatIdx
+        ORDER BY idx DESC
         LIMIT 1)
         UNION
-        (SELECT * FROM story WHERE mainCatIdx = 3
-        ORDER BY hits DESC
+        (SELECT * FROM story 
+        JOIN mainCategory
+        ON story.mainCatIdx = 3 
+        AND mainCategory.mainIdx = story.mainCatIdx
+        ORDER BY idx DESC
         LIMIT 1)
         UNION
-        (SELECT * FROM story WHERE mainCatIdx = 4
-        ORDER BY hits DESC
+        (SELECT * FROM story 
+        JOIN mainCategory
+        ON story.mainCatIdx = 4
+        AND mainCategory.mainIdx = story.mainCatIdx
+        ORDER BY idx DESC
         LIMIT 1)`, (err, result, fields) => {
         if (err) console.log(err);
         else { res.send(result); }
@@ -118,7 +147,7 @@ router.use('/categorycontents', (req, res) => {
         mainCatIdx = (SELECT mainIdx FROM mainCategory WHERE mainCategory = ?)
         AND
         subCatIdx = (SELECT subIdx FROM subCategory WHERE subCategory = ?)
-        ORDER BY date DESC
+        ORDER BY idx DESC
         LIMIT ?, 4`, [req.body.mainCategory, req.body.subCategory, req.body.page ? (req.body.page - 1) * 4 : 0], (err, result, fields) => {
             if (err) console.log(err)
             else {

@@ -13,10 +13,15 @@ updateRss.write = async (result, id) => {
     connection.query(`(SELECT mainCategory from mainCategory WHERE mainIdx = ?)
     UNION
     (SELECT subCategory from subCategory WHERE subIdx = ?)`, [result.main, result.sub], (err, res, fields) => {
-        fs.readFile(__dirname + '../../react/public/rss.xml', (err, data) => {
+        fs.readFile(path.resolve(__dirname, '../../react/public/rss.xml'), 'utf8', (err, data) => {
             let arr = data.split('\n');
-            let ret = arr.slice(0, arr.length - 2).join('\n');
+            // 최종 pubDate 변경
+            arr[6] = '        <pubDate>';
+            arr[6] += getRssDate();
+            arr[6] += '</pubDate>';
+            
             // req.body.main, req.body.sub, req.body.title, date, req.body.location, req.body.content
+            let ret = arr.slice(0, arr.length - 2).join('\n');
             ret += '<item>\n';
             ret += `<title>${result.title}</title>`;
             ret += `<link>https://blog.soga.ng/story/${id}</link>`;
@@ -28,6 +33,7 @@ updateRss.write = async (result, id) => {
             ret += `<comments>https://blog.soga.ng/story/${id}#comments</comments>`;
             ret += `<pubDate>${getRssDate()}</pubDate>`;
             ret += `</item>\n</channel>\n</rss>`;
+
             fs.writeFile(path.resolve(__dirname, '../../react/public/rss.xml'), ret, 'utf8', () => { })
             fs.writeFile(path.resolve(__dirname, '../../react/build/rss.xml'), ret, 'utf8', () => { })
         })
@@ -47,7 +53,8 @@ function formatContent(data) {
     return new Promise((resolve, reject) => {
         data = data.replace(/<\/br>/g, '<br />');
         data = data.replace(/<br>/g, '<br />');
-        data = data.replace(/data-tomark-pass="">/g, 'data-tomark-pass="" />');
+        data = data.replace(/<hr>/g, '<hr />');
+        data = data.replace(/<br data-tomark-pass="">/g, '<br data-tomark-pass="" />');
         data = data.replace(/&nbsp;/g, ' ');
         resolve(data);
     })

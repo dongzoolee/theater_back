@@ -7,3 +7,243 @@
 { id: '2', ip: '1.220.207.146' }
 { id: '2', ip: '1.220.207.146' }
 { id: '27', ip: '1.220.207.146' }
+server has started on port 2500
+tmp save success
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 3,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0 }
+{ id: '1', ip: '183.107.38.181' }
+{ id: '14', ip: '183.107.38.181' }
+insertion success
+{ targetMainId: 37,
+  storyId: '14',
+  writer: '19',
+  content: '19는요?',
+  ip: '183.107.38.181' }
+insertion success
+{ targetMainId: 37,
+  storyId: '14',
+  writer: '?',
+  content: '광광우셈',
+  ip: '211.215.156.98' }
+insertion success
+{ targetMainId: 37,
+  storyId: '14',
+  writer: '광광',
+  content: '우럿다',
+  ip: '183.107.38.181' }
+insertion success
+{ id: '14', ip: '183.107.38.181' }
+{ id: '14', ip: '183.107.38.181' }
+{ id: '27', ip: '183.107.38.181' }
+{ id: '2', ip: '183.107.38.181' }
+{ id: '1', ip: '183.107.38.181' }
+{ id: '9', ip: '183.107.38.181' }
+{ id: '9', ip: '66.249.69.107' }
+{ id: '13', ip: '66.249.69.107' }
+{ id: '29', ip: '66.249.69.111' }
+{ id: '3', ip: '66.249.69.107' }
+{ Error: Connection lost: The server closed the connection.
+    at Socket.Connection.stream.on (/home/ubuntu/docker/html/react_/node/node_modules/mysql2/lib/connection.js:91:31)
+    at Socket.emit (events.js:198:13)
+    at TCP._handle.close (net.js:607:12) fatal: true, code: 'PROTOCOL_CONNECTION_LOST' }
+{ id: '19', ip: '66.249.69.111' }
+insertion success
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 37,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0 }
+/home/ubuntu/docker/html/react_/node/route/updateRss.js:17
+            let arr = data.split('\n');
+                           ^
+
+TypeError: Cannot read property 'split' of undefined
+    at ReadFileContext.fs.readFile [as callback] (/home/ubuntu/docker/html/react_/node/route/updateRss.js:17:28)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:237:13)
+server has started on port 2500
+{ id: '6', ip: '66.249.69.107' }
+{ id: '18', ip: '66.249.69.107' }
+{ id: '23', ip: '66.249.69.111' }
+{ id: '2', ip: '218.54.66.107' }
+{ id: '38', ip: '66.249.69.107' }
+{ id: '38', ip: '1.236.152.204' }
+{ id: '29', ip: '1.236.152.204' }
+{ id: '14', ip: '1.236.152.204' }
+{ id: '17', ip: '66.249.69.111' }
+{ id: '13', ip: '1.227.220.171' }
+{ id: '24', ip: '1.227.220.171' }
+server has started on port 2500
+{ id: '39', ip: '39.7.53.34' }
+{ id: '10', ip: '39.7.53.34' }
+{ id: '39', ip: '183.107.38.181' }
+{ id: '38', ip: '183.107.38.181' }
+{ id: '38', ip: '183.107.38.181' }
+server has started on port 2500
+server has started on port 2500
+tmp save success
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 4,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0 }
+tmp save success
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 5,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0 }
+{ id: '38', ip: '211.245.120.66' }
+{ id: '25', ip: '211.245.120.66' }
+{ id: '23', ip: '211.245.120.66' }
+server has started on port 2500
+{ id: '38', ip: '183.107.38.181' }
+{ id: '41', ip: '183.107.38.181' }
+{ id: '40', ip: '183.107.38.181' }
+{ id: '38', ip: '183.107.38.181' }
+{ id: '41', ip: '218.54.66.107' }
+{ id: '38', ip: '218.54.66.107' }
+{ id: '39', ip: '218.54.66.107' }
+{ id: '6', ip: '218.54.66.107' }
+{ id: '15', ip: '66.249.65.221' }
+{ id: '38', ip: '66.249.65.221' }
+{ id: '8', ip: '66.249.65.220' }
+{ id: '32', ip: '66.249.65.221' }
+{ id: '36', ip: '66.249.65.221' }
+{ id: '41', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '38', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '38', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '40', ip: '39.7.53.34' }
+{ id: '41', ip: '39.7.53.34' }
+{ id: '41', ip: '39.7.53.34' }
+server has started on port 2500
+{ id: '39', ip: '66.249.65.221' }
+{ id: '2', ip: '106.249.211.211' }
+server has started on port 2500
+{ id: '41', ip: '218.54.66.107' }
+{ id: '40', ip: '218.54.66.107' }
+{ targetMainId: 47,
+  storyId: '40',
+  writer: '이게왜터져',
+  content:
+   '<span class="replyTo">@한국코포연맹</span><span>&nbsp;코포는 질병입니다.. 빨리 오렌지 찍고 접어야지..</span>',
+  ip: '218.54.66.107' }
+insertion success
+{ id: '10', ip: '121.131.8.77' }
+{ id: '41', ip: '183.107.38.181' }
+{ id: '39', ip: '183.107.38.181' }
+{ id: '1', ip: '183.107.38.181' }
+{ id: '38', ip: '183.107.38.181' }
+{ id: '14', ip: '66.249.79.236' }
+{ id: '41', ip: '182.208.105.78' }
+insertion success
+{ id: '17', ip: '66.249.79.234' }
+{ targetMainId: 46,
+  storyId: '41',
+  writer: '죄송합니다',
+  content:
+   '<span class="replyTo">@열받네</span><span>&nbsp;고객님ㅜㅜ 다음편에서는 꼭 연재하겠습니다</span>',
+  ip: '211.215.156.98' }
+insertion success
+{ targetMainId: 49,
+  storyId: '41',
+  writer: '죄송합니다',
+  content:
+   '<span class="replyTo">@동주리똘마니</span><span>&nbsp;고객님ㅜㅜ 설연휴 때 꼭 연재하겠습니다</span>',
+  ip: '211.215.156.98' }
+insertion success
+{ id: '41', ip: '39.7.46.98' }
+{ targetMainId: 49,
+  storyId: '41',
+  writer: 'ㅗㅔ헿ㅎㅅ',
+  content:
+   '<span>&nbsp;</span><span class="replyTo">@죄송합니다 넹</span><span>&nbsp;동주평 파이티</span>',
+  ip: '39.7.46.98' }
+insertion success
+{ id: '1', ip: '39.7.46.98' }
+{ id: '1', ip: '39.7.46.98' }
+{ id: '41', ip: '39.7.46.98' }
+{ id: '30', ip: '122.36.187.75' }
+{ id: '37', ip: '218.234.246.12' }
+{ id: '6', ip: '218.234.246.12' }
+{ id: '5', ip: '218.234.246.12' }
+{ id: '7', ip: '218.234.246.12' }
+{ id: '8', ip: '218.234.246.12' }
+{ id: '9', ip: '218.234.246.12' }
+{ id: '33', ip: '218.234.246.12' }
+{ id: '32', ip: '218.234.246.12' }
+{ id: '19', ip: '218.234.246.12' }
+{ id: '34', ip: '218.234.246.12' }
+{ id: '1', ip: '218.234.246.12' }
+{ id: '40', ip: '122.36.187.75' }
+insertion success
+{ id: '40', ip: '122.36.187.75' }
+{ id: '11', ip: '218.234.246.12' }
+{ id: '14', ip: '218.234.246.12' }
+{ id: '27', ip: '218.234.246.12' }
+{ id: '38', ip: '218.234.246.12' }
+{ id: '38', ip: '218.234.246.12' }
+{ id: '38', ip: '218.234.246.12' }
+{ id: '38', ip: '218.234.246.12' }
+{ id: '38', ip: '218.234.246.12' }
+{ id: '38', ip: '218.234.246.12' }
+{ id: '41', ip: '218.234.246.12' }
+{ id: '40', ip: '218.234.246.12' }
+{ id: '1', ip: '112.170.105.187' }
+{ id: '27', ip: '112.170.105.187' }
+{ id: '38', ip: '112.170.105.187' }
+{ id: '2', ip: '112.170.105.187' }
+{ id: '2', ip: '112.170.105.187' }
+{ id: '14', ip: '112.170.105.187' }
+{ id: '19', ip: '112.170.105.187' }
+{ id: '13', ip: '112.170.105.187' }
+{ id: '15', ip: '112.170.105.187' }
+{ id: '23', ip: '112.170.105.187' }
+{ id: '14', ip: '39.7.46.131' }
+{ id: '40', ip: '39.7.46.131' }
+insertion success
+{ id: '29', ip: '112.170.105.187' }
+{ id: '41', ip: '112.170.105.187' }
+{ id: '30', ip: '112.170.105.187' }
+{ id: '24', ip: '112.170.105.187' }
+{ id: '11', ip: '112.170.105.187' }
+{ id: '31', ip: '112.170.105.187' }
+{ id: '26', ip: '112.170.105.187' }
+{ id: '25', ip: '112.170.105.187' }
+{ id: '17', ip: '112.170.105.187' }
+{ id: '35', ip: '112.170.105.187' }
+{ id: '5', ip: '112.170.105.187' }
+{ id: '40', ip: '112.170.105.187' }
+{ id: '33', ip: '112.170.105.187' }
+{ id: '16', ip: '112.170.105.187' }
+{ id: '32', ip: '112.170.105.187' }
+{ id: '4', ip: '112.170.105.187' }
+{ id: '3', ip: '112.170.105.187' }
+{ id: '15', ip: '112.170.105.187' }
+{ id: '23', ip: '112.170.105.187' }
+{ id: '34', ip: '112.170.105.187' }
+{ id: '40', ip: '112.170.105.187' }
+{ id: '41', ip: '182.208.105.78' }
+{ id: '41', ip: '39.7.28.44' }
+{ id: '38', ip: '39.7.28.44' }
+{ id: '14', ip: '39.7.28.44' }
+{ id: '41', ip: '121.131.188.53' }
+{ id: '40', ip: '121.131.188.53' }
+{ id: '40', ip: '112.170.105.187' }
+{ id: '41', ip: '112.170.105.187' }

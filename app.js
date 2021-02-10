@@ -8,6 +8,7 @@ app.set('port', 2500);
 const writeRouter = require('./route/write');
 const readRouter = require('./route/read');
 const reportRouter = require('./route/report');
+const getInfoRouter = require('./route/getInfo');
 const socketio = require('socket.io');
 
 app.use(cors());
@@ -26,6 +27,8 @@ app.use('/api/write', writeRouter);
 app.use('/api/read', readRouter);
 // 신고하기 router
 app.use('/api/report', reportRouter);
+// 각종 정보 가져오는 router
+app.use('/api/getinfo', getInfoRouter);
 
 const server = app.listen(app.get('port'), () => {
     console.log('server has started on port ' + app.get('port'))
