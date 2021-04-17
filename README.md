@@ -58,12 +58,14 @@ MYSQL2_USER=
 MYSQL2_PW=
 MYSQL2_DB=
 
+KAFKA_HOST=
+
 GMAIL_EMAIL=
 GMAIL_PW=
 ```
 
-`GMAIL_EMAIL`and `GMAIL_PW` is used to send email with it (Gmail SMTP), when blog comment has been reported.
-
+`GMAIL_EMAIL`and `GMAIL_PW` is used to send email with it (Gmail SMTP), when blog comment has been reported.  
+`KAFKA_HOST` is used to add log data to kafka.
 
 
 TABLE - story
