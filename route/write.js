@@ -55,7 +55,11 @@ router.use('/anonycomment', async (req, res) => {
     connection.query(`INSERT INTO comment(storyId, mainWriter, mainDate, mainContent, ip)
     VALUES(?, ?, ?, ?, ?)`, [req.body.storyId, req.body.writer, date, req.body.content, req.body.ip], (err, result, fields) => {
         if (err) console.log(err);
-        else { console.log('insertion success'); res.send(''); };
+        else {
+            console.log('insertion success');
+            res.send('');
+            writelog(req.body.ip, "", "writecomment", result.insertId)
+        };
 
     })
 })
@@ -65,7 +69,11 @@ router.use('/anonysubcomment', async (req, res) => {
     connection.query(`INSERT INTO subComment(storyId, commentId, subWriter, subDate, subContent, ip)
     VALUES(?, ?, ?, ?, ?, ?)`, [req.body.storyId, req.body.targetMainId, req.body.writer, date, req.body.content, req.body.ip], (err, result, fields) => {
         if (err) console.log(err);
-        else { console.log('insertion success'); res.send(''); };
+        else {
+            console.log('insertion success');
+            res.send('');
+            writelog(req.body.ip, "", "writesubcomment", result.insertId)
+        };
     })
 
 })

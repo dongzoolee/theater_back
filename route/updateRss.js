@@ -13,7 +13,7 @@ updateRss.write = async (result, id) => {
     connection.query(`(SELECT mainCategory from mainCategory WHERE mainIdx = ?)
     UNION
     (SELECT subCategory from subCategory WHERE subIdx = ?)`, [result.main, result.sub], (err, res, fields) => {
-        fs.readFile(path.resolve(__dirname, '../../react/public/rss.xml'), 'utf8', (err, data) => {
+        fs.readFile(path.resolve(__dirname, '../public/rss.xml'), 'utf8', (err, data) => {
             let arr = data.split('\n');
             // 최종 pubDate 변경
             arr[6] = '        <pubDate>';
@@ -34,8 +34,8 @@ updateRss.write = async (result, id) => {
             ret += `<pubDate>${getRssDate()}</pubDate>`;
             ret += `</item>\n</channel>\n</rss>`;
 
-            fs.writeFile(path.resolve(__dirname, '../../react/public/rss.xml'), ret, 'utf8', () => { })
-            fs.writeFile(path.resolve(__dirname, '../../react/build/rss.xml'), ret, 'utf8', () => { })
+            fs.writeFile(path.resolve(__dirname, '../public/rss.xml'), ret, 'utf8', () => { })
+            fs.writeFile(path.resolve(__dirname, '../build/rss.xml'), ret, 'utf8', () => { })
         })
     })
 }

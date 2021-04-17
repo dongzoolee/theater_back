@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const setHit = require('./setHit');
 const mysql2 = require('mysql2');
+const { writelog } = require('../functional/logging');
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
     user: process.env.MYSQL2_USER,
@@ -20,21 +21,28 @@ router.use('/story', (req, res) => {
         else {
             res.send(result[0])
             setHit.updateHit(req)
+            writelog(req.body.ip, "", "story", req.body.id)
         };
     })
 })
+
 router.use('/tmpstory', (req, res) => {
     connection.query(`SELECT * FROM tmpStory WHERE idx = ?`, [req.body.id], (err, result) => {
         res.send(result)
     })
 })
+
 router.use('/storybyhot', (req, res) => {
     connection.query(`SELECT * FROM story
     ORDER by hits DESC`, [], (err, result, fields) => {
         if (err) console.log(err);
-        else res.send(result);
+        else { 
+            res.send(result) 
+            writelog(req.body.ip, "", "storybyhot", "")
+        };
     })
 })
+
 router.use('/storybymaincategory', (req, res) => {
     connection.query(`
     SELECT subCategory FROM subCategory
@@ -58,6 +66,7 @@ router.use('/storybymaincategory', (req, res) => {
         })
     })
 })
+
 router.use('/subcatbymaincat', (req, res) => {
     connection.query(`
     SELECT subCategory FROM subCategory
@@ -69,6 +78,7 @@ router.use('/subcatbymaincat', (req, res) => {
         })
     })
 })
+
 router.use('/categories', (req, res) => {
     if (req.query.data === "sub") {
         connection.query(`SELECT * FROM subCategory 
@@ -88,6 +98,7 @@ router.use('/categories', (req, res) => {
         });
     }
 })
+
 router.use('/comment', (req, res) => {
     connection.query(`
         SELECT * FROM comment
@@ -103,6 +114,7 @@ router.use('/comment', (req, res) => {
         })
     })
 })
+
 router.use('/storylinecontents', (req, res) => {
     connection.query(`
         (SELECT * FROM story 
@@ -136,6 +148,7 @@ router.use('/storylinecontents', (req, res) => {
         else { res.send(result); }
     })
 })
+
 router.use('/categorycontents', (req, res) => {
 
     connection.query(`
@@ -159,6 +172,7 @@ router.use('/categorycontents', (req, res) => {
         })
     })
 })
+
 router.use('/locationcontents', (req, res) => {
     connection.query(`
     SELECT COUNT(*) AS cnt FROM story WHERE 
@@ -177,6 +191,7 @@ router.use('/locationcontents', (req, res) => {
         })
     })
 })
+
 router.use('/distinctlocation', (req, res) => {
     connection.query(`SELECT DISTINCT location FROM story`, (err, result, fields) => {
         if (err) console.log(err)
@@ -185,6 +200,7 @@ router.use('/distinctlocation', (req, res) => {
         }
     })
 })
+
 router.use('/searchstory', (req, res) => {
     if (!req.body.subCategory)
         connection.query(`SELECT * FROM story 
@@ -210,4 +226,5 @@ router.use('/searchstory', (req, res) => {
             else res.send(result)
         })
 })
+
 module.exports = router;
