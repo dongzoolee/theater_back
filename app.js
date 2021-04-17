@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
+const { exec } = require('child_process');
 
 app.set('port', 2500);
 const writeRouter = require('./route/write');
@@ -10,6 +11,7 @@ const readRouter = require('./route/read');
 const reportRouter = require('./route/report');
 const getInfoRouter = require('./route/getInfo');
 const socketio = require('socket.io');
+const { writelog } = require('./functional/logging');
 
 app.use(cors());
 // POST 크기 제한 상향
@@ -37,7 +39,22 @@ const server = app.listen(app.get('port'), () => {
 const io = socketio();
 io.attach(server);
 io.on('connection', (socket) => {
-    socket.on('comment-cng',()=>{
+    let ip = socket.request.headers.forwarded;
+    
+    exec("curl ifconfig.co/json?ip="+ip, (err, stdout)=>{
+        if(err) 
+            return console.log(err)
+        else{
+            console.log('calling writelog')
+            writelog(ip, stdout, "connect", "")
+        }        
+    })
+
+    socket.on('disconnect', () => {
+        writelog(ip, "", "disconnect", "")
+    })
+
+    socket.on('comment-cng', () => {
         io.emit('update-comment');
     })
 })
