@@ -3,6 +3,8 @@ const router = express.Router();
 const setHit = require('./setHit');
 const updateRss = require('./updateRss');
 const mysql2 = require('mysql2');
+const { writelog } = require('../functional/logging');
+
 const connection = mysql2.createPool({
     host: process.env.MYSQL2_HOST,
     user: process.env.MYSQL2_USER,
