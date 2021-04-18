@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
             return console.log(err)
         else{
             console.log('calling writelog')
-            writelog(ip, stdout, "connect", "")
+            writelog(ip, stdout, "connect", socket.handshake.headers)
         }        
     })
 
