@@ -12,8 +12,10 @@ const reportRouter = require('./route/report');
 const getInfoRouter = require('./route/getInfo');
 const socketio = require('socket.io');
 const { writelog } = require('./functional/logging');
-
-app.use(cors());
+const corsOptions={
+    origin: "https://blog.soga.ng"
+}
+app.use(cors(corsOptions));
 // POST 크기 제한 상향
 app.use(express.json({
     limit: "50mb"
