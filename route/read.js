@@ -101,10 +101,13 @@ router.use('/categories', (req, res) => {
 
 router.use('/comment', (req, res) => {
     connection.query(`
-        SELECT * FROM comment
-        LEFT JOIN subComment
-        ON comment.storyId = ? AND subComment.commentId = comment.mainIdx
-        WHERE comment.storyId = ?
+    SELECT mainIdx, comment.storyId, mainWriter, mainDate, mainContent, 
+    comment.likes, mainReport, subIdx, subWriter, subDate, subContent, subReport,
+    subComment.commentId 
+    FROM comment 
+    LEFT JOIN subComment ON comment.storyId = ?
+    AND subComment.commentId = comment.mainIdx 
+    WHERE comment.storyId = ?
     `, [req.body.id, req.body.id], (err, result, fields) => {
         connection.query(`
     SELECT (SELECT COUNT(*) FROM comment WHERE storyId = ?) 
